@@ -1,60 +1,103 @@
 /*
- * The computer must randomly choose a play.
+ * A classic Rock, Paper, Sissors game played in the browser.
+ * The Computer randomly choses its play, and the player uses buttons to select.
+ * This game was made as a part of Web Development 101 on http://theodinproject.com.
+ * Made by Michael Houmann
  */
+
+// Connect to all the element
+const playerButton = document.querySelectorAll(".btn");
+const displayComputerScore = document.querySelector("#computerScore");
+const displayPlayerScore = document.querySelector("#playerScore");
+const computerPlays = document.querySelector("#computerPlays");
+const playerPlays = document.querySelector("#playerPlays");
+const playText = document.querySelector("#playText");
+const reset = document.querySelector(".reset");
+
+// setup the variables needed for the game
+const choices = ["rock", "paper", "sissors"];
+const icons = [
+  '<i class="far fa-hand-rock"></i><span class="sr-text>Rock</span>',
+  '<i class="far fa-hand-paper"></i><span class="sr-text>Paper</span>',
+  '<i class="far fa-hand-scissors"><span class="sr-text>Sissors</span></i>'
+];
+let computerScore = 0;
+let playerScore = 0;
+
 function computerPlay() {
   // Math.random() chorrs a number between 0 and 0.99
   // this way there are 33% for each outcome
-  const computerChoice = Math.random();
-  if (computerChoice < 0.34) {
-    return "rock";
-  } else if (computerChoice < 0.67) {
-    return "paper";
+  const choice = Math.random();
+  if (choice < 0.34) {
+    return 0;
+  } else if (choice < 0.67) {
+    return 1;
   } else {
-    return "sissors";
+    return 2;
   }
 }
 
-function singleRound(player, computer) {
-  // Write the different choises to the console
-  console.log("-------------------------------------------");
-  console.log("computer choose " + computer);
-  console.log("You choose " + player);
-
-  // Compare the player and computer choice and write the result
-  if (player === computer) {
-    return "It is a tie";
-  }
-  if (player === "rock") {
-    if (computer === "paper") {
-      return "Sorry you lose paper beats rock";
+function startRound(playerChoice) {
+  let comp = parseInt(computerPlay());
+  let player = parseInt(playerChoice);
+  console.log(player);
+  console.log(comp);
+  computerPlays.innerHTML = icons[comp];
+  playerPlays.innerHTML = icons[player];
+  //Compare the player and computer choice and write the result
+  if (player === comp) {
+    winner("none", "It is a tie");
+  } else if (player === 0) {
+    if (comp === 1) {
+      winner("comp", "Sorry you lose paper beats rock");
     } else {
-      return "You win rock beats sissors";
+      winner("player", "You win rock beats sissors");
     }
-  }
-  if (player === "paper") {
-    if (computer === "sissors") {
-      return "Sorry you lose sissors beats paper";
+  } else if (player === 1) {
+    if (comp === 2) {
+      winner("comp", "Sorry you lose sissors beats paper");
     } else {
-      return "You win paper beats rock";
+      winner("player", "You win paper beats rock");
     }
-  }
-  if (player === "sissors") {
-    if (computer === "rock") {
-      return "Sorry you lose rock beats sissors";
+  } else {
+    if (comp === 0) {
+      winner("comp", "Sorry you lose rock beats sissors");
     } else {
-      return "You win sissors beats paper";
+      winner("player", "You win sissors beats paper");
     }
   }
 }
 
-// Let the game run 5 times and then end
-function game() {
-  for (let i = 0; i < 5; i++) {
-    const playerChoice = prompt("Enter your choice").toLowerCase();
-    const computerChoice = computerPlay();
-    console.log(singleRound(playerChoice, computerPlay()));
+function winner(win, text) {
+  playText.innerText = text;
+  if (win === "player") {
+    playerScore += 1;
+    displayPlayerScore.innerText = playerScore;
+  } else if (win === "comp") {
+    computerScore += 1;
+    displayComputerScore.innerText = computerScore;
+  } else {
+    return;
   }
 }
 
-// Start the game
-game();
+// Set up eventlistener for the player choice amd play again
+playerButton.forEach(btn => {
+  btn.addEventListener("click", e => {
+    player = e.target.id;
+    console.log(startRound(player));
+  });
+});
+
+reset.addEventListener("click", () => {
+  computerScore = 0;
+  playerScore = 0;
+  computerPlays.innerHTML = "";
+  playerPlays.innerHTML = "";
+  displayComputerScore.innerText = computerScore;
+  displayPlayerScore.innerText = playerScore;
+});
+
+// When the page is loaded, show 0 and 0 in the score
+window.onload = ((displayComputerScore.innerText = computerScore),
+(displayPlayerScore.innerText = playerScore));

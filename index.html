@@ -5,24 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Rock, Paper, Sissors</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Gentium+Basic|Muli:200,400,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>Rock, Paper, Sissors</h1>
-    <div class="buttons">
-      <button class="btn" id="btn1">Rock</button>
-      <button class="btn" id="btn2">Paper</button>
-      <button class="btn" id="btn3">Sissors</button>
-    </div>
-    <div class="score">
-      <h2>Score</h2>
-      <div>Computer: <span id="computerScore"></span></div>
-      <div>You: <span id="PlayerScore"></span></div>
-      <div id="board"></div>
-      <div id="computerPlays"></div>
-      <div id="playerPlays"></div>
-      <div id="playText"></div>
-    </div>
-    <button id="again">Play Again</button>
+    <header>
+      <h1>Rock, Paper, Sissors</h1>
+    </header>
+    <main>
+      <div class="buttons">
+        <h2>Make your choice:</h2>
+        <button class="btn" id="0">
+          Rock
+        </button>
+        <button class="btn" id="1">
+          Paper
+        </button>
+        <button class="btn" id="2">
+          Sissors
+        </button>
+      </div>
+      <div class="score-box">
+        <h2>Score:</h2>
+        <div class="score">
+          <p>Computer:</p>
+          <h3 id="computerScore"></h3>
+        </div>
+        <div class="score">
+          <p>You:</p>
+          <h3 id="playerScore"></h3>
+        </div>
+      </div>
+      <div class="board">
+        <div class="play" id="computerPlays">
+          <p class="sr-text">Computer plays:</p>
+        </div>
+        <div class="play" id="playerPlays">
+          <p class="sr-text">You play:</p>
+        </div>
+        <p class="resume" id="playText"></p>
+      </div>
+      <button class="btn reset">Reset Score</button>
+    </main>
+    <footer>
+      <div class="copy">
+        &copy;2019 Made by
+        <a href="https://github.com/mhoumann87" target="_blank"
+          >Michael Houmann</a
+        >
+        as part of a web developer course on
+        <a href="https://www.theodinproject.com" target="_blank"
+          >the Odin Project</a
+        >.
+      </div>
+      <div class="social">
+        <a href="https://twitter.com/MichaelHoumann" target="_blank"
+          ><i class="fab fa-twitter"></i
+          ><span class="sr-text">Visit on Twitter</span></a
+        >
+        <a href="https://github.com/mhoumann87" target="_blank"
+          ><i class="fab fa-github"></i>
+          <span class="sr-text">Visit on GitHub</span></a
+        >
+        <a href="www.linkedin.com/in/michael-houmann-3b03654b" target="_blank"
+          ><i class="fab fa-linkedin"></i
+          ><span class="sr-text">Visit on LinkedIn</span></a
+        >
+      </div>
+    </footer>
 
     <script src="./game.js"></script>
   </body>
