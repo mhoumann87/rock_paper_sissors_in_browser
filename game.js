@@ -40,8 +40,8 @@ function computerPlay() {
 function startRound(playerChoice) {
   let comp = parseInt(computerPlay());
   let player = parseInt(playerChoice);
-  console.log(player);
-  console.log(comp);
+  /*   console.log(player);
+  console.log(comp); */
   computerPlays.innerHTML = icons[comp];
   playerPlays.innerHTML = icons[player];
   //Compare the player and computer choice and write the result
@@ -85,7 +85,7 @@ function winner(win, text) {
 playerButton.forEach(btn => {
   btn.addEventListener("click", e => {
     player = e.target.id;
-    console.log(startRound(player));
+    startRound(player);
   });
 });
 
@@ -96,6 +96,7 @@ reset.addEventListener("click", () => {
   playerPlays.innerHTML = "";
   displayComputerScore.innerText = computerScore;
   displayPlayerScore.innerText = playerScore;
+  playText.innerText = "";
 });
 
 // When the page is loaded, show 0 and 0 in the score
